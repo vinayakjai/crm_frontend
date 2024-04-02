@@ -17,7 +17,6 @@ function Login() {
 
   //defining all functions here
   async function onSubmit() {
-    console.log(loginDetails);
     if (!loginDetails.email || !loginDetails.password) {
       alert("please enter all details");
       return;
@@ -25,11 +24,15 @@ function Login() {
     const response = await dispatch(login(loginDetails));
 
     if (response.payload.data) {
+    
       navigate("/");
     } else {
       alert(response.payload.response.data);
       setLoginDetails({ ...loginDetails, email: "", password: "" });
     }
+  }
+  function redirect() {
+    navigate("/signup");
   }
   return (
     <>
@@ -84,7 +87,10 @@ function Login() {
             </div>
             <p>
               Not registered yet then please{" "}
-              <a className="text-red-800"> Sign up</a>
+              <a className="text-red-800" onClick={redirect}>
+                {" "}
+                Sign up
+              </a>
             </p>
           </div>
         </div>

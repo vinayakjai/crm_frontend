@@ -1,15 +1,12 @@
+import Card from "../../components/Card";
 import HomeLayout from "../../layouts/homeLayout";
 
-function Home(){
-
-  
-   
-    return (
-         <HomeLayout>
-            <h1>hello</h1>
-         </HomeLayout>
-
-    )
+function Home() {
+  return (
+    <HomeLayout>
+      <Card />
+    </HomeLayout>
+  );
 }
 
 export default Home;

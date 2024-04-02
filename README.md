@@ -5,3 +5,4 @@ step 4:setup redux toolkit
 step 5:npm i axios
 step 5:npm i react-router-dom
 step 6 npm install react-icons
+step 7:npm i @material-tailwind/react

@@ -7,23 +7,22 @@ import { useEffect } from "react";
 function HomeLayout({ children }) {
   //hooks declaration-----
   const authState = useSelector((state) => state.auth);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //defining custom functions
-  function onLogout(){
-    if(authState.isLoggedIn){
-          dispatch(logout())
+  function onLogout() {
+    if (authState.isLoggedIn) {
+      dispatch(logout());
     }
   }
 
-
   //useEffect------
-   useEffect(()=>{
-      if(!authState.isLoggedIn){
-         navigate('/login');
-      }
-   },[])
+  useEffect(() => {
+    if (!authState.isLoggedIn) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div>
       <div className="drawer">
@@ -53,19 +52,31 @@ function HomeLayout({ children }) {
             {!authState.isLoggedIn ? (
               <>
                 <li>
-                <Link to='/login'> <a>Login</a></Link>
+                  <Link to="/login">
+                    {" "}
+                    <a>Login</a>
+                  </Link>
                 </li>
                 <li>
-                <Link to='/signup'> <a>Sign up</a></Link>
+                  <Link to="/signup">
+                    {" "}
+                    <a>Sign up</a>
+                  </Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                <Link to='/login'> <a onClick={onLogout}>Logout</a></Link>
+                  <Link to="/login">
+                    {" "}
+                    <a onClick={onLogout}>Logout</a>
+                  </Link>
                 </li>
                 <li>
-                <Link to='/profile'> <a>Profile</a></Link>
+                  <Link to="/profile">
+                    {" "}
+                    <a>Profile</a>
+                  </Link>
                 </li>
               </>
             )}

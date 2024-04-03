@@ -20,6 +20,7 @@ function HomeLayout({ children }) {
   //useEffect------
   useEffect(() => {
     if (!authState.isLoggedIn) {
+      console.log('s')
       navigate("/login");
     }
   }, []);

@@ -44,6 +44,7 @@ export const authSlice = createSlice({
       if (action.payload?.status != 201 || !action.payload) return;
       state.isLoggedIn = action.payload?.data?.token != undefined;
       state.data = action.payload?.data?.userData;
+      console.log(action.payload)
       state.token = action.payload?.data?.token;
       state.role = action.payload?.data?.userData?.userType;
       localStorage.setItem("role", action.payload?.data?.userData?.userType);
@@ -52,7 +53,7 @@ export const authSlice = createSlice({
         "data",
         JSON.stringify(action.payload?.data?.userData)
       ); //CONVERTING OBJECT INTO STRING AS BROSWER ONLY UNDERSTANDS STRING
-      localStorage.setItem("token", action.payload?.data?.userData?.token);
+      localStorage.setItem("token", action.payload?.data?.token);
     });
   },
 });

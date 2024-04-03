@@ -20,7 +20,7 @@ function HomeLayout({ children }) {
   //useEffect------
   useEffect(() => {
     if (!authState.isLoggedIn) {
-      console.log('s')
+      
       navigate("/login");
     }
   }, []);
@@ -44,23 +44,23 @@ function HomeLayout({ children }) {
           ></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content bg-red-100">
             <li>
-              <a>View All tickets</a>
+              <a onClick={()=>navigate('/')}>home</a>
             </li>
             <li>
-              <a>Dashboard</a>
+              <a onClick={()=>navigate('/dashboard')}>Dashboard</a>
             </li>
 
             {!authState.isLoggedIn ? (
               <>
                 <li>
                   <Link to="/login">
-                    {" "}
+                  
                     <a>Login</a>
                   </Link>
                 </li>
                 <li>
                   <Link to="/signup">
-                    {" "}
+                  
                     <a>Sign up</a>
                   </Link>
                 </li>
@@ -69,13 +69,13 @@ function HomeLayout({ children }) {
               <>
                 <li>
                   <Link to="/login">
-                    {" "}
+
                     <a onClick={onLogout}>Logout</a>
                   </Link>
                 </li>
                 <li>
                   <Link to="/profile">
-                    {" "}
+                   
                     <a>Profile</a>
                   </Link>
                 </li>

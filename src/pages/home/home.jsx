@@ -1,50 +1,27 @@
-//hooks import-----------
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
 
 //component imports--------
 import Card from "../../components/Card";
 import HomeLayout from "../../layouts/homeLayout";
 
-//action import------
-import { getAllTickets } from "../../Redux/slices/ticketSlice";
+
 
 //third party library imports--------
 import {TbProgressBolt} from "react-icons/tb";
 import {MdOutlineDoneAll,MdPending,MdCancel} from "react-icons/md";
 import {BsFillPCircleFill} from "react-icons/bs";
+import useTickets from "../../hooks/useTickets";
 
 
 
 function Home() {
-  //hooks declaration-------------
-  const dispatch = useDispatch();
-  const navigate=useNavigate()
-
-  //accessing state from store
-  const authState = useSelector((state) => state.auth);
-  const ticketState = useSelector((state) => state.ticket);
-
-
-  //defining functions here-------
-  async function loadAllTickets() {
-    const response = await dispatch(getAllTickets());
-    console.log(response)
-   
-  }
-  /*
-  
-  */
-   
-  //useEffect ----------
-  useEffect(() => {
-    
-    loadAllTickets();
-  }, [authState.token]);
+   const [ticketState]=useTickets();
   return (
     <HomeLayout>
-      <Card
+      {
+        ticketState && (
+          <>
+           <Card
       
       titleText="Open"
       status={
@@ -86,6 +63,9 @@ function Home() {
       }
       statusIcon={<MdCancel />}
     />
+          </>
+        )
+      }
     </HomeLayout>
   );
 }

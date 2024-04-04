@@ -1,12 +1,13 @@
 //components import-----
 
+
 import useTickets from "../hooks/useTickets";
 import HomeLayout from "../layouts/homeLayout";
 
 function DashBoard() {
   //hooks declaration
   const [ticketState] = useTickets();
-  console.log(ticketState);
+  
 
   return (
     <>

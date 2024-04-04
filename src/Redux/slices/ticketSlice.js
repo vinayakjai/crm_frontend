@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../helpers/axiosinstance";
 
 const initialState = {
+  downloadedTickets:[],
   ticketList: [],
   ticketDistribution: {
     open: 0,
@@ -21,7 +22,7 @@ export const getAllTickets = createAsyncThunk(
           "x-access-token": localStorage.getItem("token"),
         },
       });
-      console.log(response);
+      
       return response;
     } catch (err) {
       console.log(err);
@@ -33,13 +34,22 @@ export const getAllTickets = createAsyncThunk(
 const ticketSlice = createSlice({
   name: "ticket",
   initialState,
-  reducer: {},
+  reducers: {
+    filterTickets:(state,action)=>{
+     
+        state.ticketList=state.downloadedTickets.filter((ticket)=>ticket.status===action.payload.status.toLowerCase());
+        
+    },resetTickets:(state)=>{
+      state.ticketList=state.downloadedTickets;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllTickets.fulfilled, (state, action) => {
       console.log(action);
       if (!action?.payload?.data) return;
       console.log(action.payload);
       state.ticketList = action?.payload?.data?.result;
+      state.downloadedTickets=action?.payload?.data?.result;
       const tickets = action?.payload?.data?.result;
       tickets.forEach((ticket) => {
         state.ticketDistribution[ticket.status] =
@@ -48,5 +58,7 @@ const ticketSlice = createSlice({
     });
   },
 });
+
+export const {filterTickets}=ticketSlice.actions;
 
 export default ticketSlice.reducer;
